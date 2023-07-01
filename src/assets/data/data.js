@@ -234,5 +234,14 @@ const data = [
     address: "Chowk sultanpur 2358 store, Sultanpur UP, IN - 228001",
     url: "https://localshopindia.com/IN/UP/Sultanpur/2358-Store",
   },
+  {
+    id: 30,
+    name: "Gauri Cloth House",
+    phone: 6306099650,
+    img: shopimg.GauriClothHouse,
+    address:
+      "681 Gauri Cloth House shahganj chaurah, Sultanpur UP, IN - 228001",
+    url: "https://localshopindia.com/IN/UP/Sultanpur/Gauri-Cloth-House-",
+  },
 ];
 export default data;

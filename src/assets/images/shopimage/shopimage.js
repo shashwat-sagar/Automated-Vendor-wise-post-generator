@@ -28,6 +28,7 @@ import MilikiZone from "./MilikiZone228001.jpg";
 import CottonCountryShop from "./CottonCountryShop228001.jpg";
 import ServiceWatchHouse from "./ServiceWatchHouse228001.jpg";
 import NewMetroMobileShop from "./NewMetroMobileShop228001.jpg";
+import GauriClothHouse from "./GauriClothHouse228001.jpg";
 
 export {
   Babycare,
@@ -60,4 +61,5 @@ export {
   CottonCountryShop,
   ServiceWatchHouse,
   NewMetroMobileShop,
+  GauriClothHouse,
 };
