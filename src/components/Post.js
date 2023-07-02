@@ -20,6 +20,28 @@ const Post = () => {
   }, []);
   const [data, setData] = useState(data2);
   const [jsonData, setJsonData] = useState(null);
+  const [layout, setLayout] = useState("layout1");
+  // const [text, setText] = useState(null);
+
+  // const paste = async () => {
+  //   const text1 = await navigator.clipboard.readText(text);
+  //   setText(text1);
+  //   console.log(text);
+  // };
+
+  // const handleOnChange = (e) => {
+  //   setText(e.target.value);
+  //   setJsonData(e.target.value);
+  //   console.log(jsonData);
+  // };
+
+  const changeLayout = () => {
+    if (layout === "layout1") {
+      setLayout("layout2");
+    } else {
+      setLayout("layout1");
+    }
+  };
 
   const uploadJson = () => {
     try {
@@ -55,8 +77,8 @@ const Post = () => {
   };
 
   const toImage = () => {
+    console.time("time");
     data.forEach((item) => {
-      console.time("time");
       let node = document.getElementById(item.name);
       htmlToImage
         .toJpeg(node, { quality: 1 })
@@ -93,13 +115,19 @@ const Post = () => {
           {data.length > 4 ? (
             <span>Json Is Uploaded</span>
           ) : (
-            <span>Upload Json</span>
+            <span>Please Upload Json Data</span>
           )}
-          <textarea
-            className="textArea"
-            placeholder="Enter your message here"
-            onChange={(e) => setJsonData(e.target.value)}
-          ></textarea>
+          <div className="textAreaDiv">
+            {/* <button className="copy" onClick={paste}>
+              <i className="fa fa-copy"></i>
+            </button> */}
+            <textarea
+              className="textArea"
+              id="exampleFormControlTextarea1"
+              placeholder="Paste your json data here"
+              onChange={(e) => setJsonData(e.target.value)}
+            ></textarea>
+          </div>
           <button className="defaultImageBtn" onClick={uploadJson}>
             Upload Json
           </button>
@@ -141,6 +169,11 @@ const Post = () => {
               Defalut Image
             </button>
           </div>
+          <div>
+            <button className="defaultImageBtn" onClick={changeLayout}>
+              Change layout
+            </button>
+          </div>
           <button
             disabled={!images ? true : false}
             className="btn"
@@ -180,100 +213,187 @@ const Post = () => {
                     warm wishes from {item.name} in association with local shop
                     india
                   </div>
-                  <div
-                    className="info"
-                    style={{
-                      width: "100%",
-                      height: " 600px",
-                    }}
-                  >
-                    <div className="shop">
-                      <div className="shop-details">
-                        <div className="shop-image">
-                          <img src={shopImgUrl} alt="" />
+                  {layout === "layout1" ? (
+                    <div
+                      className="info"
+                      style={{
+                        width: "100%",
+                        height: " 600px",
+                      }}
+                    >
+                      <div className="shop">
+                        <div className="shop-details">
+                          <div className="shop-image">
+                            <img src={shopImgUrl} alt="" />
+                          </div>
+                          <div className="shop-qr">
+                            <QRCode
+                              value={
+                                url +
+                                item.zipCodeDetail.state.code +
+                                "/" +
+                                item.zipCodeDetail.district +
+                                "/" +
+                                urlShopName
+                              }
+                              size="230"
+                              qrStyle="dots"
+                              eyeRadius={5}
+                              removeQrCodeBehindLogo={true}
+                              eyeColor="#ff6f00"
+                              ecLevel="H"
+                              logoPaddingStyle="circle"
+                              logoImage={logoHeader}
+                              logoWidth={20}
+                              logoHeight={20}
+                              logoPadding={1}
+                              fgColor="#ff3f00"
+                            />
+                            Scan to view my products
+                          </div>
                         </div>
-                        <div className="shop-qr">
-                          <QRCode
-                            value={
-                              url +
-                              item.zipCodeDetail.state.code +
-                              "/" +
-                              item.zipCodeDetail.district +
-                              "/" +
-                              urlShopName
-                            }
-                            size="200"
-                            qrStyle="dots"
-                            eyeRadius={5}
-                            removeQrCodeBehindLogo={true}
-                            eyeColor="#ff6f00"
-                            ecLevel="H"
-                            logoPaddingStyle="circle"
-                            logoImage={logoHeader}
-                            logoWidth={20}
-                            logoHeight={20}
-                            logoPadding={1}
-                            fgColor="#ff3f00"
-                          />
-                          Scan to view my products
+                        <div className="shop-contact">
+                          <div className="shop-contact-details">
+                            <div className="shop-address">
+                              <i className="fa-solid fa-shop icon"></i>
+                              <div>
+                                {item.address1}, {item.zipCodeDetail.district},{" "}
+                                {item.zipCodeDetail.state.code},{" "}
+                                {item.zipCodeDetail.country.code} -{" "}
+                                {item.zipCodeDetail.zipCode}
+                              </div>
+                            </div>
+
+                            <div>
+                              <i className="fa-solid fa-phone icon"></i>
+                              {item.phone}
+                            </div>
+
+                            <div className="shop-address">
+                              <i className="fa-solid fa-globe icon"></i>
+                              <div>
+                                {url}
+                                {item.zipCodeDetail.state.code}/
+                                {item.zipCodeDetail.district}/{urlShopName}
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div className="shop-contact">
-                        <div className="shop-contact-details">
-                          <div className="shop-address">
-                            <i className="fa-solid fa-shop icon"></i>
+                      <div className="lsi">
+                        <div className="lsi-logo">
+                          <img src={lsiLogo} alt="" />
+                        </div>
+                        <div className="lsi-contact">
+                          <div className="lsi-contact-details">
                             <div>
-                              {item.address1}, {item.zipCodeDetail.district},{" "}
-                              {item.zipCodeDetail.state.code},{" "}
-                              {item.zipCodeDetail.country.code} -{" "}
-                              {item.zipCodeDetail.zipCode}
+                              <i className="fa-solid fa-phone icon"></i>
+                              05362-356013
+                            </div>
+
+                            <div>
+                              <i className="fa-solid fa-envelope icon"></i>
+                              care@localshopindia.com
+                            </div>
+
+                            <div>
+                              <i className="fa-solid fa-globe icon"></i>
+                              www.localshopindia.com
                             </div>
                           </div>
-
-                          <div>
-                            <i className="fa-solid fa-phone icon"></i>
-                            {item.phone}
-                          </div>
-
-                          <div className="shop-address">
-                            <i className="fa-solid fa-globe icon"></i>
-                            <div>
-                              {url}
-                              {item.zipCodeDetail.state.code}/
-                              {item.zipCodeDetail.district}/{urlShopName}
-                            </div>
+                          <div className="lsi-qr">
+                            <img src={lsiqr} alt="" />
+                            <div>Scan to Start Shopping</div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div className="lsi">
-                      <div className="lsi-logo">
-                        <img src={lsiLogo} alt="" />
-                      </div>
-                      <div className="lsi-contact">
-                        <div className="lsi-contact-details">
-                          <div>
-                            <i className="fa-solid fa-phone icon"></i>
-                            05362-356013
+                  ) : (
+                    <div className="info2">
+                      <div className="shop2">
+                        <div className="shopUpper">
+                          <div className="shop-image2">
+                            <img src={shopImgUrl} alt="" />
                           </div>
-
-                          <div>
-                            <i className="fa-solid fa-envelope icon"></i>
+                          <span className="shop-address-2">
+                            {item.address1}, {item.zipCodeDetail.district},{" "}
+                            {item.zipCodeDetail.state.code},{" "}
+                            {item.zipCodeDetail.country.code} -{" "}
+                            {item.zipCodeDetail.zipCode}
+                          </span>
+                        </div>
+                        <div className="shopLower">
+                          <div className="shop-contact2">
+                            <div className="shopQr2">
+                              <QRCode
+                                value={
+                                  url +
+                                  item.zipCodeDetail.state.code +
+                                  "/" +
+                                  item.zipCodeDetail.district +
+                                  "/" +
+                                  urlShopName
+                                }
+                                size="110"
+                                className="qr2"
+                                qrStyle="dots"
+                                eyeRadius={5}
+                                removeQrCodeBehindLogo={true}
+                                eyeColor="#ff6f00"
+                                ecLevel="H"
+                                logoPaddingStyle="circle"
+                                logoImage={logoHeader}
+                                logoWidth={20}
+                                logoHeight={20}
+                                logoPadding={1}
+                                fgColor="#ff3f00"
+                              />
+                              <p>Scan To View My Products</p>
+                            </div>
+                            <div className="shopPhone2">
+                              <i className="fa-solid fa-phone"></i>
+                              {item.phone}
+                            </div>
+                          </div>
+                          <div className="shopUrl2">
+                            <i className="fa-solid fa-globe icon2-globe"></i>
+                            {url}
+                            {item.zipCodeDetail.state.code}/
+                            {item.zipCodeDetail.district}/{urlShopName}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="lsi2">
+                        <div className="shopUpper">
+                          <div className="lsi-image2">
+                            <img src={lsiLogo} alt="" />
+                          </div>
+                        </div>
+                        <div className="shopLower">
+                          <div className="shop-contact2">
+                            <div className="shopQr2">
+                              <img src={lsiqr} alt="" />
+                              <p>Scan To View My Products</p>
+                            </div>
+                            <div className="shopPhone2">
+                              <i className="fa-solid fa-phone"></i>
+                              05362-356013
+                            </div>
+                          </div>
+                          <div className="shopUrl2">
+                            <i className="fa-solid fa-globe icon2-globe"></i>
+                            {url}
+                            {item.zipCodeDetail.state.code}/
+                            {item.zipCodeDetail.district}/{urlShopName}
+                          </div>
+                          <div className="lsiEmail2">
+                            <i className="fa-solid fa-envelope icon2-mail"></i>
                             care@localshopindia.com
                           </div>
-
-                          <div>
-                            <i className="fa-solid fa-globe icon"></i>
-                            www.localshopindia.com
-                          </div>
-                        </div>
-                        <div className="lsi-qr">
-                          <img src={lsiqr} alt="" />
-                          <div>Scan to Start Shopping</div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               );
             })}

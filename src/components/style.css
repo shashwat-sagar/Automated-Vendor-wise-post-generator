@@ -60,6 +60,18 @@ body {
   top: 0;
   opacity: 0;
 }
+.textAreaDiv {
+  position: relative;
+}
+.copy {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 4px;
+  color: #909090;
+}
 
 .textArea {
   outline: none;
@@ -296,7 +308,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 10px;
+  font-size: 22px;
   font-weight: 600;
   font-style: italic;
   color: var(--blue);
@@ -323,4 +335,150 @@ body {
 }
 .shop-contact-details div {
   margin: 9px 0;
+}
+
+.info2 {
+  width: 100%;
+  height: 450px;
+  display: flex;
+  padding: 20px;
+  flex-direction: row;
+}
+.shop2 {
+  padding: 0px 10px;
+
+  width: 100%;
+}
+.lsi2 {
+  width: 100%;
+  padding: 0px 10px;
+}
+.shopUpper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.shop-image2 {
+  width: 70%;
+  height: 240px;
+  box-shadow: 0 0 8px 0 #858585;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.lsi-image2 {
+  width: 70%;
+  height: 240px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+.shop-image2 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.lsi-image2 img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+.shopQr2 img {
+  width: 30%;
+
+  object-fit: contain;
+  object-position: center;
+}
+.shop-address-2 {
+  margin: 8px;
+  font-weight: 500;
+  color: rgb(65, 65, 65);
+  font-weight: 600;
+  font-family: sans-serif;
+}
+.shopEmail2 {
+  margin-top: 5px;
+  padding: 0 34px;
+}
+.shop-contact2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  padding: 0px 40px;
+}
+.shopQr2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.shopQr2 p {
+  width: 140px;
+  color: var(--blue);
+  font-weight: 600;
+  font-style: italic;
+  font-size: 18px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+.shopPhone2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: var(--blue);
+  font-weight: 600;
+  font-style: italic;
+  font-size: 24px;
+  justify-content: space-around;
+  width: 200px;
+}
+.shopPhone2 i {
+  color: var(--white);
+  background-color: var(--light-blue);
+  padding: 8px;
+  border-radius: 20px;
+}
+.shopUrl2 {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: var(--blue);
+  font-weight: 600;
+  font-style: italic;
+  font-size: 22px;
+  width: 100%;
+  justify-content: center;
+}
+
+.icon2-globe {
+  background-color: var(--light-blue);
+  color: var(--white);
+  font-size: 20px;
+  padding: 6px;
+  margin-right: 10px;
+  border-radius: 20px;
+}
+.icon2-mail {
+  background-color: var(--light-blue);
+  color: var(--white);
+  font-size: 18px;
+  padding: 7px;
+  margin-right: 10px;
+  border-radius: 20px;
+}
+.lsiEmail2 {
+  margin: 0px 0px 0px 40px;
+
+  color: var(--blue);
+  font-weight: 600;
+  font-style: italic;
+  font-size: 22px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
