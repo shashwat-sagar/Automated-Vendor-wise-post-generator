@@ -7,23 +7,36 @@ import {
   logoHeader,
   uploadimage,
 } from "../assets/images/image";
-import data from "../assets/data/data";
+import data2 from "../assets/data/data2";
 import * as htmlToImage from "html-to-image";
 import { QRCode } from "react-qrcode-logo";
-
 const Post = () => {
-  const newData = data;
+  var url = "https://localshopindia.com/IN/";
+
   useEffect(() => {
     console.warn("Created By Shashwat Sagar");
     console.info("https://shashwatsagar.tech");
     console.info("Please do not use this application for commercial purpose");
   }, []);
+  const [data, setData] = useState(data2);
+  const [jsonData, setJsonData] = useState(null);
+
+  const uploadJson = () => {
+    try {
+      setData(JSON.parse(jsonData));
+      console.log(data.length);
+    } catch (err) {
+      console.log("please upload a valid json file");
+    }
+  };
+
   const toImageDownload = () => {
     console.log("please wait generating images");
     setGeneratingImages("please wait Generating images...");
     toImage();
   };
   const [generatingImages, setGeneratingImages] = useState("");
+
   const [images, setImages] = useState("");
   // eslint-disable-next-line no-unused-vars
   const [imageUrl, setImageUrl] = useState("");
@@ -42,7 +55,7 @@ const Post = () => {
   };
 
   const toImage = () => {
-    newData.forEach((item) => {
+    data.forEach((item) => {
       console.time("time");
       let node = document.getElementById(item.name);
       htmlToImage
@@ -67,7 +80,7 @@ const Post = () => {
   return (
     <>
       <span className="totalShops">
-        We have total <b>{data.length}</b> shops data in the data.json file.
+        {data ? "Total Shops: " + data.length : "Total Shops: 0"}
       </span>
       <div
         className="main"
@@ -77,6 +90,20 @@ const Post = () => {
         }}
       >
         <div className="download">
+          {data.length > 4 ? (
+            <span>Json Is Uploaded</span>
+          ) : (
+            <span>Upload Json</span>
+          )}
+          <textarea
+            className="textArea"
+            placeholder="Enter your message here"
+            onChange={(e) => setJsonData(e.target.value)}
+          ></textarea>
+          <button className="defaultImageBtn" onClick={uploadJson}>
+            Upload Json
+          </button>
+
           <div className="upload-btn-wrapper">
             <button className="btn-u">Upload an Image</button>
             <input
@@ -106,7 +133,13 @@ const Post = () => {
           <div className="defaultimageDiv">
             If you don't have an image, don't worry click below to select
             default image
-            <button onClick={selectDefaultImage}>Defalut Image</button>
+            <button
+              className="defaultImageBtn"
+              disabled={data ? false : true}
+              onClick={selectDefaultImage}
+            >
+              Defalut Image
+            </button>
           </div>
           <button
             disabled={!images ? true : false}
@@ -120,7 +153,16 @@ const Post = () => {
         </div>
         {images.length > 0 ? (
           <>
-            {newData.map((item) => {
+            {data.map((item) => {
+              let urlShopName = item.name;
+              // replace all spaces with -
+              urlShopName = urlShopName.replace(/\s+/g, "-");
+              // remove https:// from url
+              let shopImgUrl = item.imgSrc.replace(
+                "https://localshopindia-resource-2023-1.s3.ap-south-1.amazonaws.com/",
+                ""
+              );
+
               return (
                 <div
                   style={{
@@ -148,12 +190,18 @@ const Post = () => {
                     <div className="shop">
                       <div className="shop-details">
                         <div className="shop-image">
-                          <img src={item.img} alt="" />
+                          <img src={shopImgUrl} alt="" />
                         </div>
                         <div className="shop-qr">
-                          {/* <img src={shopqr} alt="" /> */}
                           <QRCode
-                            value={item.url}
+                            value={
+                              url +
+                              item.zipCodeDetail.state.code +
+                              "/" +
+                              item.zipCodeDetail.district +
+                              "/" +
+                              urlShopName
+                            }
                             size="200"
                             qrStyle="dots"
                             eyeRadius={5}
@@ -174,7 +222,12 @@ const Post = () => {
                         <div className="shop-contact-details">
                           <div className="shop-address">
                             <i className="fa-solid fa-shop icon"></i>
-                            <div>{item.address}</div>
+                            <div>
+                              {item.address1}, {item.zipCodeDetail.district},{" "}
+                              {item.zipCodeDetail.state.code},{" "}
+                              {item.zipCodeDetail.country.code} -{" "}
+                              {item.zipCodeDetail.zipCode}
+                            </div>
                           </div>
 
                           <div>
@@ -184,7 +237,11 @@ const Post = () => {
 
                           <div className="shop-address">
                             <i className="fa-solid fa-globe icon"></i>
-                            <div>{item.url}</div>
+                            <div>
+                              {url}
+                              {item.zipCodeDetail.state.code}/
+                              {item.zipCodeDetail.district}/{urlShopName}
+                            </div>
                           </div>
                         </div>
                       </div>

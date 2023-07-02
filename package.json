@@ -2,6 +2,7 @@
   "name": "shopwsie",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://localshopindia-resource-2023-1.s3.ap-south-1.amazonaws.com/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

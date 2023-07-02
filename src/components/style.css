@@ -60,6 +60,28 @@ body {
   top: 0;
   opacity: 0;
 }
+
+.textArea {
+  outline: none;
+  border: none;
+  width: 400px;
+  color: var(--blue);
+  padding: 10px;
+  height: 100px;
+  background-color: #ebebeb;
+  border-radius: 5px;
+}
+.textArea:focus {
+  box-shadow: 0 0 5px 0 var(--black);
+  transition: 200ms;
+}
+.textArea::placeholder {
+  padding: 10px 0;
+  text-align: center;
+  color: var(--black);
+  font-family: "Courier New", Courier, monospace;
+}
+
 .defaultimageDiv {
   display: flex;
   flex-direction: column;
@@ -69,7 +91,7 @@ body {
   font-weight: 600;
   font-family: "Courier New", Courier, monospace;
 }
-.defaultimageDiv button {
+.defaultImageBtn {
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -80,7 +102,7 @@ body {
   margin: 10px 0;
   cursor: pointer;
 }
-.defaultimageDiv button:hover {
+.defaultImageBtn:hover {
   box-shadow: 0 0 10px 0 var(--black);
   transition: 200ms;
 }

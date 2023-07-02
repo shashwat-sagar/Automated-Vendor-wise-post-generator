@@ -1,5 +1,3 @@
-import "./App.css";
-
 import Post from "./components/Post";
 
 function App() {
